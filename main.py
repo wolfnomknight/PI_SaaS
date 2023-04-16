@@ -5,6 +5,8 @@ from fastapi import FastAPI
 import fluxo_cx
 import datetime
 
+
+# ==== O código abaixo é usado para teste ==== #
 caixa_do_dia = fluxo_cx.criar_novo_caixa(data=str(datetime.date.today()))
 # print(caixa_do_dia)
 
@@ -15,6 +17,7 @@ print(caixa_do_dia)
 
 print(fluxo_cx.fechar_caixa(caixa_do_dia))
 
-# Controle de estoque
-# Ponto de equilibrio e sugestao de preços
-
+# TODO: Buscar dados do banco de dados
+# TODO: Controle de estoque
+# TODO: Ponto de equilibrio e sugestao de preços
+# TODO: Interação com a interface
