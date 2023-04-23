@@ -1,10 +1,11 @@
 
 day_stock = {"Data": "",}
 # O default_stock deverá ser baixado do banco de dados
-# O formato é nome: [quantidade em estoque, estoque mínimo, preço de venda]
-default_stock = {"Refrigerante Coca-Cola 2l": [10, 5, 7.50],
-                 "Salgado Coxinha de Frango": [5, 5, 4.00],
-                 "Chocolate Lacta Diamante Negro": [4, 2, 8.00]}
+# É igual ao estoque finalizado no dia anterior
+# O formato é nome: [quantidade em estoque, estoque mínimo, preço de venda, vendidos hoje]
+default_stock = {"Refrigerante Coca-Cola 2l": [10, 5, 7.50, 0],
+                 "Salgado Coxinha de Frango": [5, 5, 4.00, 0],
+                 "Chocolate Lacta Diamante Negro": [4, 2, 8.00, 0]}
 
 
 def alterar_estoque_padrao(add: bool, name: str, value: float):
@@ -33,6 +34,9 @@ def mudar_quantidade_de_estoque(stock: dict, name: str, qnt: int):
         # TODO: Este aviso deve ser alterado para aparecer na interface
         print("Não há estoque suficiente para esta venda, favor verificar.")
     stock[name][0] += qnt
+    # Adicionar a quantidade vendida no dia
+    if qnt < 0:
+        stock[name][3] += qnt*-1
 
 
 def forcar_mudanca_de_estoque(stock: dict, name: str, qnt: int):
@@ -45,9 +49,13 @@ def fechar_controle_de_estoque_diario(stock: dict):
     for item in stock:
         # TODO: Jogar os dados de estoque para o banco de dados
         # TODO: Estes avisos devem ser alterados para aparecer na interface
-        if stock[item][0] == 0:
-            print(f"O produto {item} está com estoque zerado!")
-        elif stock[item][0] < 0:
-            print(f"O produto {item} está com erro de quantidade em estoque!")
-        elif stock[item][0] < stock[item][1]:
-            print(f"O produto {item} está abaixo do estoque mínimo, hora de comprar mais!")
+        if item != "Data":
+            print(f"Foram vendidos {stock[item][3]} {item} hoje!\n")
+            if stock[item][0] == 0:
+                print(f"O produto {item} está com estoque zerado!")
+            elif stock[item][0] < 0:
+                print(f"O produto {item} está com erro de quantidade em estoque!")
+            elif stock[item][0] < stock[item][1]:
+                print(f"O produto {item} está abaixo do estoque mínimo, hora de comprar mais!")
+        else:
+            print(f"\nResumo do controle de vendas de {stock[item]}:\n")

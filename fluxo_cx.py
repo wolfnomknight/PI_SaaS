@@ -1,6 +1,4 @@
 
-present_value = 0.00
-
 # O value_income_options e o value_outcome_options devem ser baixados do banco de dados, usando estas listas para
 # demonstrar o funcionamento pretendido
 value_income_options = ["Venda", "Investimento"]
@@ -19,13 +17,19 @@ def alterar_opcoes_de_fluxo(income: bool, add: bool, name: str):
         if add:
             value_income_options.append(name)
         else:
-            value_income_options.remove(name)
+            try:
+                value_income_options.remove(name)
+            except ValueError:
+                print(f"Não foi possível retirar {name} das alternativas: Não existe.")
 
     else:
         if add:
             value_outcome_options.append(name)
         else:
-            value_outcome_options.remove(name)
+            try:
+                value_outcome_options.remove(name)
+            except ValueError:
+                print(f"Não foi possível retirar {name} das alternativas: Não existe.")
 
 
 def criar_novo_caixa(data: str):
@@ -40,7 +44,7 @@ def muda_valor(caixa: dict, tipo: str, serv_ou_prod: str, valor: float):
     """Esta função coloca ou retira valores do fluxo de caixa. Adiciona valores e descritivos no dicionário do caixa do dia.
     caixa: o dict que representa o fluxo de caixa do dia;
     tipo: dentre os valores presentes nas opções de entradas e saídas;
-    serv_ou_prod: referente a que é o valor;
+    serv_ou_prod: referente a que é o valor, nome do produto ou serviço;
     valor: valor monetário."""
     if tipo not in caixa:
         caixa[tipo] = [{serv_ou_prod: valor}]
