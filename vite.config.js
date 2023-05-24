@@ -10,6 +10,7 @@ export default defineConfig({
     modulePreload: false,
     target: 'esnext',
     outDir: '../static/',
+    emptyOutDir: true,
     assetsDir: '',
     rollupOptions: {
       input: '/main.jsx',
