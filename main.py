@@ -10,7 +10,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 
 
-# load_dotenv()
+load_dotenv()
 debug = os.getenv('DEBUG', False)
 
 
@@ -42,4 +42,4 @@ def homepage(request: Request):
 
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8000, reload=debug)
+    uvicorn.run('main:app', host='127.0.0.1', port=8000, reload=debug)

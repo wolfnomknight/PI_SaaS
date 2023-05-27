@@ -1,11 +1,15 @@
-import Card from '../components/Card';
-import styles from './home.module.css'
+import CardSection from '../components/Cards/Section';
+import TableSection from '../components/Table/Section';
+import TransactionSection from '../components/Transaction/Section';
+import './home.module.css'
 
 export default function Home() {
   return (
     <main>
       <h1>Homepage</h1>
-      <Card cardTitle={'Entrada'} />
+      <CardSection />
+      <TransactionSection />
+      <TableSection />
     </main>
   );
 }
