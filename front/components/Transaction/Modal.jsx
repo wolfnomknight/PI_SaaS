@@ -1,7 +1,8 @@
 import { useRef, useEffect } from 'react'
 import './Modal.module.css'
+import Button from '../Button';
 
-export default function Modal({ isOpen, onClose }) {
+export default function Modal({ isOpen, onClose, setTransactions }) {
     const ref = useRef(null);
     useEffect(() => {
         if (isOpen) {
@@ -9,34 +10,34 @@ export default function Modal({ isOpen, onClose }) {
             return () => ref.current?.close()
         }
     }, [isOpen]);
-
-    const dt = new Date().toISOString()
+    function handleSubmit(e) {
+        e.preventDefault()
+        const transactionData = new FormData(e.target)
+        const transactions = JSON.parse(localStorage.getItem("transactions")) ?? []
+        transactions.push(Object.fromEntries(transactionData.entries()))
+        localStorage.setItem("transactions", JSON.stringify(transactions))
+        setTransactions(JSON.parse(localStorage.getItem("transactions")))
+        onClose()
+    }
     return (
         <dialog ref={ref}> 
-            <form method="dialog" onSubmit={onClose}>
+            <form method="dialog" onSubmit={handleSubmit}>
                 <fieldset>
                     <label>
                         Titulo
-                        <input type="text" />
+                        <input name="titulo" type="text"  required/>
                     </label>
                     <label>
                         Entrada
-                        <input name="income-expense" type="radio" />
-                    </label>
-                    <label>
-                        Despesa
-                        <input name="income-expense" type="radio" />
+                        <input name="income" type="checkbox" defaultChecked />
                     </label>
                     <label>
                         Valor
-                        <input type="number" />
-                    </label>
-                    <label>
-                        <input type="hidden" value={dt}/>
+                        <input name="valor" type="number" step="0.01" required/>
                     </label>
                 </fieldset>
-                <button type="button" onClick={onClose}>Cancelar</button>
-                <button type="submit">Salvar</button>
+                <Button onClick={onClose}>Cancelar</Button>
+                <Button type="submit">Salvar</Button>
             </form>
         </dialog>
     )

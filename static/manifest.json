@@ -1,21 +1,14 @@
 {
   "main.css": {
-    "file": "main-1c4636e9.css",
+    "file": "main-df3bcfc9.css",
     "src": "main.css"
   },
   "main.jsx": {
-    "assets": [
-      "plus-e62f7fd8.svg"
-    ],
     "css": [
-      "main-1c4636e9.css"
+      "main-df3bcfc9.css"
     ],
-    "file": "main-2218f944.js",
+    "file": "main-b1dea3af.js",
     "isEntry": true,
     "src": "main.jsx"
-  },
-  "static/plus.svg": {
-    "file": "plus-e62f7fd8.svg",
-    "src": "static/plus.svg"
   }
 }
