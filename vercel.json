@@ -1,0 +1,9 @@
+{
+    "devCommand": "python -m main",
+    "builds": [
+      { "src": "main.py", "use": "@vercel/python" }
+    ],
+    "routes": [
+      { "src": "/src/api(.*)", "dest": "main.py" }
+    ]
+  }
