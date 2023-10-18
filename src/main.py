@@ -7,6 +7,6 @@ app = FastAPI()
 
 @app.get("/", response_class=HTMLResponse)
 def homepage(request: Request):
-    return Jinja2Templates(directory="src/templates").TemplateResponse(
+    return Jinja2Templates(directory="templates").TemplateResponse(
         "index.html", {"request": request}
     )
