@@ -9,7 +9,7 @@ app = FastAPI()
 #     return Jinja2Templates(directory="src/templates").TemplateResponse(
 #         "index.html", {"request": request}
 #     )
-@app.get("/")
+@app.get("/", response_class=HTMLResponse)
 def main():
     html = """<!DOCTYPE html>
 <html lang="pt-BR">
@@ -22,4 +22,4 @@ def main():
   <div>hello world</div>
 </body>
 </html>"""
-    return HTMLResponse(html)
+    return html
