@@ -38,9 +38,9 @@ def home(request: Request):
 def test():
     return {
         'hello': 'world', 'dir': listdir(join(dirname(abspath(__file__)), 'data')), 
-        'excaulebur': pd.read_csv(open(join('data', 'Excaulebur_2024-04-04.csv')), encoding='unicode_escape', engine='python'),
-        'file': open(join('data', 'Excaulebur_2024-04-04.csv')),
-        'file_2': open(join(dirname(abspath(__file__)), 'data', 'Excaulebur_2024-04-04.csv'))
+        'excaulebur': pd.read_csv(open(join('data', 'Excaulebur_2024-04-04.csv'), 'r'), encoding='unicode_escape', engine='python'),
+        'file': open(join('data', 'Excaulebur_2024-04-04.csv'), 'r'),
+        'file_2': open(join(dirname(abspath(__file__)), 'data', 'Excaulebur_2024-04-04.csv'), 'r')
     }
 
 @app.get('/plants/{plant}')
