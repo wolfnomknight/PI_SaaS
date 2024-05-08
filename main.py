@@ -31,7 +31,7 @@ def get_file_data(file, plant):
 app = FastAPI()
 
 @app.on_event("startup")
-async def startup_event():
+def startup_event():
     for plant in plants.keys():
         plants[plant] = get_plant_data(plant)
 
@@ -45,7 +45,7 @@ def home(request: Request):
 def test():
     return {
         'hello': 'world', 'dir': listdir(join(dirname(abspath(__file__)), 'data')), 
-        'excaulebur': get_file_data('Excaulebur_2024-04-04.csv', 'excaulebur')
+        # 'excaulebur': get_file_data('Excaulebur_2024-04-04.csv', 'excaulebur')
     }
 
 @app.get('/plants/{plant}')
