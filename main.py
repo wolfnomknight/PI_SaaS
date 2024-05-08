@@ -1,5 +1,5 @@
-from os.path import join
-from os import listdir, getcwd
+from os import listdir
+from os.path import join, dirname, abspath
 from contextlib import asynccontextmanager
 
 import pandas as pd
@@ -10,7 +10,7 @@ from fastapi.templating import Jinja2Templates
 plants = {'excaulebur': None, 'totosa': None}
 
 def get_plant_data(plant):
-    df = pd.concat([get_file_data(file, plant) for file in listdir(f'{getcwd()}\\data')])
+    df = pd.concat([get_file_data(file, plant) for file in listdir(join(dirname(abspath(__file__)), 'data'))])
     return df.sort_values(by=['Data', 'Hora']).to_json(orient='records')
 
 def get_file_data(file, plant):
@@ -36,7 +36,7 @@ def home(request: Request):
 
 @app.get('/test')
 def test():
-    return {'hello': 'world'}
+    return {'hello': 'world', 'dir': listdir(join(dirname(abspath(__file__)), 'data'))}
 
 @app.get('/plants/{plant}')
 def get_plant(plant):
