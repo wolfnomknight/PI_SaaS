@@ -51,3 +51,11 @@ def test():
 @app.get('/plants/{plant}')
 def get_plant(plant):
     return plants.get(plant)
+
+@app.get('/plants/{plant}/data')
+def get_data(plant):
+    return get_plant_data(plant)
+
+@app.get('/plants/{plant}/{file}')
+def get_data(plant, file):
+    return get_file_data(file, plant)
