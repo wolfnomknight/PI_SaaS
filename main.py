@@ -36,7 +36,7 @@ def home(request: Request):
 
 @app.get('/test')
 def test():
-    return {'hello': 'world', 'dir': listdir(join(dirname(abspath(__file__)), 'data'))}
+    return {'hello': 'world', 'dir': listdir(join(dirname(abspath(__file__)), 'data')), 'totosa': pd.concat([get_file_data(file, 'totosa') for file in listdir(join(dirname(abspath(__file__)), 'data'))])}
 
 @app.get('/plants/{plant}')
 def get_plant(plant):
