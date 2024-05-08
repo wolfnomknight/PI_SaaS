@@ -20,13 +20,20 @@ def get_file_data(file, plant):
             df['Data'] = file.split('.')[0][-10:]
             return df[['Valor do sinal', 'Temperatura', 'Umidade', 'Data', 'Hora']]
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     for plant in plants.keys():
+#         plants[plant] = get_plant_data(plant)
+#     yield
+
+# app = FastAPI(lifespan=lifespan)
+
+app = FastAPI()
+
+@app.on_event("startup")
+async def startup_event():
     for plant in plants.keys():
         plants[plant] = get_plant_data(plant)
-    yield
-
-app = FastAPI(lifespan=lifespan)
 
 templates = Jinja2Templates(directory='templates')
 
