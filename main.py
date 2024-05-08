@@ -15,7 +15,7 @@ def get_plant_data(plant):
 
 def get_file_data(file, plant):
     if file.split('_')[0] == plant.title():
-        with open(join('data', file)) as f:
+        with open(join('data', file), 'r') as f:
             df = pd.read_csv(f, encoding='unicode_escape', engine='python')
             df['Data'] = file.split('.')[0][-10:]
             return df[['Valor do sinal', 'Temperatura', 'Umidade', 'Data', 'Hora']]
