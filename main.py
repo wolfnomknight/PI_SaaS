@@ -15,7 +15,7 @@ def get_plant_data(plant):
 
 def get_file_data(file, plant):
     if file.split('_')[0] == plant.title():
-        with open(join('data', file), 'r') as f:
+        with open(join(dirname(abspath(__file__)), 'data', file), 'r') as f:
             df = pd.read_csv(f, encoding='unicode_escape', engine='python')
             df['Data'] = file.split('.')[0][-10:]
             return df[['Valor do sinal', 'Temperatura', 'Umidade', 'Data', 'Hora']]
@@ -37,8 +37,8 @@ def home(request: Request):
 @app.get('/test')
 def test():
     return {
-        # 'hello': 'world', 'dir': listdir(join(dirname(abspath(__file__)), 'data')), 
-        'excaulebur': pd.read_csv(open(join('data', 'Excaulebur_2024-04-04.csv'), 'r'), encoding='unicode_escape', engine='python')
+        'hello': 'world', 'dir': listdir(join(dirname(abspath(__file__)), 'data')), 
+        'excaulebur': get_file_data('Excaulebur_2024-04-04.csv', 'excaulebur')
     }
 
 @app.get('/plants/{plant}')
