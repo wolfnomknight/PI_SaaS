@@ -48,11 +48,13 @@ def test():
         # 'excaulebur': get_file_data('Excaulebur_2024-04-04.csv', 'excaulebur')
     }
 
-@app.get('/plants/{plant}')
+@app.get('/plants/{plant}/test')
 def get_plant(plant):
     return pd.read_csv(join(dirname(abspath(__file__))), 'data', f'{plant.title()}.csv', encoding='unicode_escape', engine='python').sort_values(by=['Data', 'Hora']).to_json(orient='records')
 
-# plants.get(plant)
+@app.get('/plants/{plant}/test')
+def get_plant(plant):
+    return plants.get(plant)
 
 # @app.get('/plants/{plant}/data')
 # def get_data(plant):
