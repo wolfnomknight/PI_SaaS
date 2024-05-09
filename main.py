@@ -52,7 +52,7 @@ def test():
 def get_plant(plant):
     return pd.read_csv(join(dirname(abspath(__file__))), 'data', f'{plant.title()}.csv', encoding='unicode_escape', engine='python').sort_values(by=['Data', 'Hora']).to_json(orient='records')
 
-@app.get('/plants/{plant}/test')
+@app.get('/plants/{plant}')
 def get_plant(plant):
     return plants.get(plant)
 
